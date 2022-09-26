@@ -5,12 +5,8 @@ C++言語のためのJSONパーサーライブラリです。
 ## JSON
 
 ```
-<Json> -> "{" { <Pair> | <Pair>, } "}"
-<Pair> -> <Key>: <Value>
-<Key> -> "<Alp> { <Alp> | <Num> } "
-<Value> -> "<Alp> { <Alp> | <Num> } "
-<Alp> -> a|...|z|A|...|Z
-<Num> -> 0|...|9
+<Value> -> [String] | <Object>
+<Object> -> "{" "}" | "{" [String]: <Value> {, [String]: <Value> } "}" 
 ```
 
 ## 参考URL
