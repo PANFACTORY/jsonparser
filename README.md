@@ -5,7 +5,7 @@ C++言語のためのJSONパーサーライブラリです。
 ## JSON
 
 ```
-<Value> -> [String] | <Object>
+<Value> -> [String] | [Number] | [Boolean] | [Null] | <Object>
 <Object> -> "{" "}" | "{" [String]: <Value> {, [String]: <Value> } "}" 
 ```
 
