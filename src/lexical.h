@@ -11,7 +11,7 @@ namespace JsonParser {
         std::vector<std::string> chs;
         char ch = ss.get();
         while (!ss.eof()) {
-            if (ch == ' ' || ch == '\t' || ch == '\n') {
+            if (std::isspace(ch)) {
                 ch = ss.get();
                 continue;
             } else if (ch == '"') {
@@ -22,7 +22,7 @@ namespace JsonParser {
                     str += ch;
                     ch = ss.get();
                 }
-                // TODO: Trim spaces at end of str.
+                str = str.substr(0, str.find_last_not_of(" \f\t\v\r\n") + 1);
                 // TODO: Check end of str is \".
                 chs.push_back(str);
             } else if (std::isdigit(ch) || ch == '-') {
@@ -32,7 +32,7 @@ namespace JsonParser {
                     str += ch;
                     ch = ss.get();
                 }
-                // TODO: Trim spaces at end of str.
+                str = str.substr(0, str.find_last_not_of(" \f\t\v\r\n") + 1);
                 // TODO: str is number.
                 chs.push_back(str);
             } else if (ch == 't' || ch == 'f' || ch == 'n') {
@@ -42,7 +42,7 @@ namespace JsonParser {
                     str += ch;
                     ch = ss.get();
                 }
-                // TODO: Trim spaces at end of str.
+                str = str.substr(0, str.find_last_not_of(" \f\t\v\r\n") + 1);
                 // TODO: str is "true", "false" or "null".
                 chs.push_back(str);
             } else {
