@@ -17,6 +17,7 @@ namespace JsonParser {
             } else if (ch == '"') {
                 std::string str("\"");
                 ch = ss.get();
+                // TODO: "で閉じているかで判別する
                 while (!ss.eof() && ch != ':' && ch != '}' && ch != ',' && ch != ']') {
                     str += ch;
                     ch = ss.get();

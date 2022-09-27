@@ -15,7 +15,7 @@ namespace JsonParser {
         // TODO: indexがchs.sizeを越えていないかチェック
         switch (chs[index][0]) {
         case ']':
-            // TODO: 空の配列なのか空のオブジェクトなのかを区別する
+            parent->SetArray();
             return index + 1;
         case '"':
         case '-':
@@ -61,7 +61,7 @@ namespace JsonParser {
         std::cout << "Object() is called and index is " << index << std::endl;
         switch (chs[index][0]) {
         case '}':
-            // TODO: 空の配列なのか空のオブジェクトなのかを区別する
+            parent->SetChild();
             return index + 1;
         case '"':
             {

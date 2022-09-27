@@ -5,14 +5,22 @@
 #include <iostream>
 
 namespace JsonParser {
+    class Node;
+}
+
+std::ostream& operator<<(std::ostream& stream, const JsonParser::Node& node);
+
+namespace JsonParser {
     // Node
     class Node {
+        friend std::ostream& ::operator<<(std::ostream& stream, const JsonParser::Node& node);
 public:
         Node() = delete;
         Node(std::string _key) {
             this->key = _key;
             this->isvalueset = false;
             this->ischildrenset = false;
+            this->isarrayset = false;
         }
         Node(const Node&) = delete;
         ~Node() {
@@ -27,19 +35,34 @@ public:
         void SetValue(std::string _value) {
             this->value = _value;
             this->isvalueset = true;
+            // TODO: 既にオブジェクトや配列がセットされている場合にはエラーを出す。
+        }
+
+        void SetChild() {
+            this->ischildrenset = true;
+            // TODO: 既に値や配列がセットされている場合にはエラーを出す。
         }
 
         void SetChild(Node* _node) {
             this->children.push_back(_node);
             this->ischildrenset = true;
+            // TODO: 既に値や配列がセットされている場合にはエラーを出す。
+        }
+
+        void SetArray() {
+            this->isarrayset = true;
+            // TODO: 既に値やオブジェクトがセットされている場合にはエラーを出す。
         }
 
         void SetArray(Node* _node) {
             this->children_array.push_back(_node);
+            this->isarrayset = true;
+            // TODO: 既に値やオブジェクトがセットされている場合にはエラーを出す。
         }
 
+private:
         std::string key, value;
-        bool isvalueset, ischildrenset;
+        bool isvalueset, ischildrenset, isarrayset;
         std::vector<Node*> children, children_array;
     };
 }
@@ -59,7 +82,7 @@ std::ostream& operator<<(std::ostream& stream, const JsonParser::Node& node) {
             stream << "," << *node.children[i];
         }
         stream << "}";
-    } else {
+    } else if (node.isarrayset) {
         stream << "[";
         if (node.children_array.size() > 0) {
             stream << *node.children_array[0];
@@ -68,6 +91,8 @@ std::ostream& operator<<(std::ostream& stream, const JsonParser::Node& node) {
             stream << "," << *node.children_array[i];
         }
         stream << "]";
+    } else {
+        // TODO: ここでエラーを出す。
     }
     return stream;
 }
