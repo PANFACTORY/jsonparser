@@ -1,3 +1,14 @@
+/**
+ * @file lexical.h
+ * @author PANFACTORY (github.com/PANFACTORY)
+ * @brief
+ * @version 0.1
+ * @date 2022-09-27
+ *
+ * @copyright Copyright (c) 2022
+ *
+ */
+
 #pragma once
 
 #include <vector>
@@ -6,7 +17,12 @@
 #include <cctype>
 
 namespace JsonParser {
-    // LexicalAnalyser
+    /**
+     * @brief
+     *
+     * @param ss
+     * @return std::vector<std::string>
+     */
     std::vector<std::string> LexicalAnalyser(std::istream& ss) {
         std::vector<std::string> chs;
         char ch = ss.get();
