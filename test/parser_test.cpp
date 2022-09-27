@@ -109,7 +109,7 @@ TEST(JsonParserTest, ParserTest7) {
     std::cout << root << std::endl;
 }
 
-TEST(JsonParserTest, LexicalTest8) {
+TEST(JsonParserTest, ParserTest8) {
     std::vector<std::string> chs = {
         "{",
         "\"user_info\"",
@@ -123,6 +123,93 @@ TEST(JsonParserTest, LexicalTest8) {
         ":",
         "\"Yamada Taro\"",
         "}",
+        "}"
+    };
+    JsonParser::Node root("");
+    ASSERT_EQ(JsonParser::Value(0, chs, &root), chs.size());
+    std::cout << root << std::endl;
+}
+
+TEST(JsonParserTest, ParserTest9) {
+    std::vector<std::string> chs = {
+        "{",
+        "\"color_list\"",
+        ":",
+        "[",
+        "\"red\"",
+        ",",
+        "\"green\"",
+        ",",
+        "\"blue\"",
+        "]",
+        ",",
+        "\"num_list\"",
+        ":",
+        "[",
+        "123",
+        ",",
+        "456",
+        ",",
+        "789",
+        "]",
+        ",",
+        "\"mix_list\"",
+        ":",
+        "[",
+        "\"red\"",
+        ",",
+        "456",
+        ",",
+        "null",
+        ",",
+        "true",
+        "]",
+        ",",
+        "\"array_list\"",
+        ":",
+        "[",
+        "[",
+        "12",
+        ",",
+        "23",
+        "]",
+        ",",
+        "[",
+        "34",
+        ",",
+        "45",
+        "]",
+        ",",
+        "[",
+        "56",
+        ",",
+        "67",
+        "]",
+        "]",
+        ",",
+        "\"object_list\"",
+        ":",
+        "[",
+        "{",
+        "\"name\"",
+        ":",
+        "\"Tanaka\"",
+        ",",
+        "\"age\"",
+        ":",
+        "26",
+        "}",
+        ",",
+        "{",
+        "\"name\"",
+        ":",
+        "\"Suzuki\"",
+        ",",
+        "\"age\"",
+        ":",
+        "32",
+        "}",
+        "]",
         "}"
     };
     JsonParser::Node root("");
