@@ -1,7 +1,7 @@
 /**
  * @file lexical.h
  * @author PANFACTORY (github.com/PANFACTORY)
- * @brief
+ * @brief Lexical analyzer of JSON
  * @version 0.1
  * @date 2022-09-27
  *
@@ -18,12 +18,12 @@
 
 namespace JsonParser {
     /**
-     * @brief
+     * @brief       Lexical analyze JSON format stream and generate token array.
      *
-     * @param ss
-     * @return std::vector<std::string>
+     * @param[in]   std::istream& ss            JSON format stream
+     * @return      std::vector<std::string>    Token array
      */
-    std::vector<std::string> LexicalAnalyser(std::istream& ss) {
+    std::vector<std::string> LexicalAnalyzer(std::istream& ss) {
         std::vector<std::string> chs;
         char ch = ss.get();
         while (!ss.eof()) {
