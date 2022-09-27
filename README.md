@@ -5,13 +5,17 @@ C++言語のためのJSONパーサーライブラリです。
 ## JSON
 
 ```
-<Json> -> "{" { <Pair> | <Pair>, } "}"
-<Pair> -> <Key>: <Value>
-<Key> -> "<Alp> { <Alp> | <Num> } "
-<Value> -> "<Alp> { <Alp> | <Num> } "
-<Alp> -> a|...|z|A|...|Z
-<Num> -> 0|...|9
+<Value> -> [String] | [Number] | [Boolean] | [Null] | <Object> | <Array>
+<Object> -> "{" "}" | "{" [String]: <Value> {, [String]: <Value> } "}"  
+<Array> -> "[" "]" | "[" <Value> {, <Value>} "]"
 ```
+
+## ドキュメント
+- [ドキュメント]()
 
 ## 参考URL
 - [JSON形式](https://www.tohoho-web.com/ex/json.html)
+
+## 依存
+- Google Test
+- Doxygen
