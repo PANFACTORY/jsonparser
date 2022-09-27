@@ -1,9 +1,10 @@
 var indexSectionsWithContent =
 {
-  0: "alnopv",
+  0: "alnopsv",
   1: "n",
-  2: "lp",
-  3: "alopv"
+  2: "lnp",
+  3: "alnopsv",
+  4: "o"
 };
 
 var indexSectionNames =
@@ -11,7 +12,8 @@ var indexSectionNames =
   0: "all",
   1: "classes",
   2: "files",
-  3: "functions"
+  3: "functions",
+  4: "related"
 };
 
 var indexSectionLabels =
@@ -19,6 +21,7 @@ var indexSectionLabels =
   0: "All",
   1: "Classes",
   2: "Files",
-  3: "Functions"
+  3: "Functions",
+  4: "Friends"
 };
 
