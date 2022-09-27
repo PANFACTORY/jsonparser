@@ -2,12 +2,12 @@
 
 #include <vector>
 #include <string>
-#include <sstream>
+#include <iostream>
 #include <cctype>
 
 namespace JsonParser {
     // LexicalAnalyser
-    std::vector<std::string> LexicalAnalyser(std::stringstream &ss) {
+    std::vector<std::string> LexicalAnalyser(std::istream& ss) {
         std::vector<std::string> chs;
         char ch = ss.get();
         while (!ss.eof()) {
