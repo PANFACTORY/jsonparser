@@ -15,3 +15,7 @@ C++言語のためのJSONパーサーライブラリです。
 
 ## 参考URL
 - [JSON形式](https://www.tohoho-web.com/ex/json.html)
+
+## 依存
+- Google Test
+- Doxygen
