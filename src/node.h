@@ -12,10 +12,14 @@ public:
         Node(std::string _key) {
             this->key = _key;
             this->isvalueset = false;
+            this->ischildrenset = false;
         }
         Node(const Node&) = delete;
         ~Node() {
             for (auto child : this->children) {
+                delete child;
+            }
+            for (auto child : this->children_array) {
                 delete child;
             }
         }
@@ -27,12 +31,16 @@ public:
 
         void SetChild(Node* _node) {
             this->children.push_back(_node);
+            this->ischildrenset = true;
         }
 
-        std::string key;
-        std::string value;
-        bool isvalueset;
-        std::vector<Node*> children;
+        void SetArray(Node* _node) {
+            this->children_array.push_back(_node);
+        }
+
+        std::string key, value;
+        bool isvalueset, ischildrenset;
+        std::vector<Node*> children, children_array;
     };
 }
 
@@ -42,7 +50,7 @@ std::ostream& operator<<(std::ostream& stream, const JsonParser::Node& node) {
     }
     if (node.isvalueset) {
         stream << node.value;
-    } else {
+    } else if (node.ischildrenset) {
         stream << "{";
         if (node.children.size() > 0) {
             stream << *node.children[0];
@@ -51,6 +59,15 @@ std::ostream& operator<<(std::ostream& stream, const JsonParser::Node& node) {
             stream << "," << *node.children[i];
         }
         stream << "}";
+    } else {
+        stream << "[";
+        if (node.children_array.size() > 0) {
+            stream << *node.children_array[0];
+        }
+        for (int i = 1; i < node.children_array.size(); ++i) {
+            stream << "," << *node.children_array[i];
+        }
+        stream << "]";
     }
     return stream;
 }
