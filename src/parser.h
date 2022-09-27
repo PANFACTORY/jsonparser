@@ -1,3 +1,14 @@
+/**
+ * @file parser.h
+ * @author PANFACTORY (github.com/PANFACTORY)
+ * @brief Parser of JSON
+ * @version 0.1
+ * @date 2022-09-28
+ *
+ * @copyright Copyright (c) 2022
+ *
+ */
+
 #pragma once
 
 #include <vector>
@@ -10,6 +21,14 @@
 namespace JsonParser {
     int Value(int index, const std::vector<std::string> &chs, Node *node);
 
+    /**
+     * @brief       Process <Array> in recursive descent parser.
+     *
+     * @param[in]   int index                           Current position in token array
+     * @param[in]   const std::vector<std::string> &chs Token array from lexical analyzer
+     * @param[in]   JsonParser::Node *parent            Pointer indicating the current AST node
+     * @return      int                                 Updated position in token array
+     */
     int Array(int index, const std::vector<std::string> &chs, Node *parent) {
         std::cout << "Array() is called and index is " << index << std::endl;
         // TODO: indexがchs.sizeを越えていないかチェック
@@ -56,6 +75,14 @@ namespace JsonParser {
         return 0;
     }
 
+    /**
+     * @brief       Process <Object> in recursive descent parser.
+     *
+     * @param[in]   int index                           Current position in token array
+     * @param[in]   const std::vector<std::string> &chs Token array from lexical analyzer
+     * @param[in]   JsonParser::Node *parent            Pointer indicating the current AST node
+     * @return      int                                 Updated position in token array
+     */
     int Object(int index, const std::vector<std::string> &chs, Node *parent) {
         // TODO: indexがchs.sizeを越えていないかチェック
         std::cout << "Object() is called and index is " << index << std::endl;
@@ -85,6 +112,14 @@ namespace JsonParser {
         }
     }
 
+    /**
+     * @brief       Process <Value> in recursive descent parser.
+     *
+     * @param[in]   int index                           Current position in token array
+     * @param[in]   const std::vector<std::string> &chs Token array from lexical analyzer
+     * @param[in]   JsonParser::Node *node              Pointer indicating the current AST node
+     * @return      int                                 Updated position in token array
+     */
     int Value(int index, const std::vector<std::string> &chs, Node *node) {
         // TODO: indexがchs.sizeを越えていないかチェック
         std::cout << "Value() is called and index is " << index << std::endl;
@@ -116,7 +151,12 @@ namespace JsonParser {
         }
     }
 
-    // Parser
+    /**
+     * @brief       Generate AST from token array with recursive descent parsing.
+     *
+     * @param[in]   const std::vector<std::string> &chs Token array from lexical analyzer
+     * @return      JsonParser::Node*                   Pointer indicating the root AST node
+     */
     Node* Parser(const std::vector<std::string> &chs) {
         Node* root = new Node("");
         std::cout << Value(0, chs, root) << std::endl;
