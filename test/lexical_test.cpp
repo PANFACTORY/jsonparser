@@ -84,3 +84,33 @@ TEST(JsonParserTest, LexicalUnhappyTest3) {
     ss << "{ \"name\" : nullptr }";
     EXPECT_ANY_THROW(JsonParser::LexicalAnalyzer(ss));
 }
+
+TEST(JsonParserTest, LexicalUnhappyTest4) {
+    std::stringstream ss;
+    ss << "{ \"number\" : 01 }";
+    EXPECT_ANY_THROW(JsonParser::LexicalAnalyzer(ss));
+}
+
+TEST(JsonParserTest, LexicalUnhappyTest5) {
+    std::stringstream ss;
+    ss << "{ \"number\" : -a }";
+    EXPECT_ANY_THROW(JsonParser::LexicalAnalyzer(ss));
+}
+
+TEST(JsonParserTest, LexicalUnhappyTest6) {
+    std::stringstream ss;
+    ss << "{ \"number\" : -- }";
+    EXPECT_ANY_THROW(JsonParser::LexicalAnalyzer(ss));
+}
+
+TEST(JsonParserTest, LexicalUnhappyTest7) {
+    std::stringstream ss;
+    ss << "{ \"number\" : 1.2.3 }";
+    EXPECT_ANY_THROW(JsonParser::LexicalAnalyzer(ss));
+}
+
+TEST(JsonParserTest, LexicalUnhappyTest8) {
+    std::stringstream ss;
+    ss << "{ \"number\" : 1a }";
+    EXPECT_ANY_THROW(JsonParser::LexicalAnalyzer(ss));
+}
