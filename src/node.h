@@ -141,7 +141,7 @@ std::ostream& operator<<(std::ostream& stream, const JsonParser::Node& node) {
         }
         stream << "]";
     } else {
-        // TODO: ここでエラーを出す。
+        throw std::runtime_error("At operator<< of Node class: \"node\" is set neither value, object nor array.");
     }
     return stream;
 }

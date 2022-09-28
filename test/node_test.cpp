@@ -2,44 +2,49 @@
 
 #include "../src/node.h"
 
-TEST(JsonParserTest, NodeTest1) {
+// Happy path testing
+TEST(JsonParserTest, NodeHappyTest1) {
     JsonParser::Node root(""), *child = new JsonParser::Node("\"name\"");
     child->SetValue("\"Tanaka\"");
     root.SetChild(child);
-    std::cout << root << std::endl;
-    ASSERT_TRUE(true);
+    std::stringstream ss;
+    ss << root;
+    ASSERT_EQ(ss.str(), "{\"name\":\"Tanaka\"}");
 }
 
-TEST(JsonParserTest, NodeTest2) {
+TEST(JsonParserTest, NodeHappyTest2) {
     JsonParser::Node root("");
     JsonParser::Node *child1 = new JsonParser::Node("\"name\""), *child2 = new JsonParser::Node("\"age\"");
     child1->SetValue("\"Tanaka\"");
     root.SetChild(child1);
     child2->SetValue("26");
     root.SetChild(child2);
-    std::cout << root << std::endl;
-    ASSERT_TRUE(true);
+    std::stringstream ss;
+    ss << root;
+    ASSERT_EQ(ss.str(), "{\"name\":\"Tanaka\",\"age\":26}");
 }
 
-TEST(JsonParserTest, NodeTest3) {
+TEST(JsonParserTest, NodeHappyTest3) {
     JsonParser::Node root("");
     JsonParser::Node *child1 = new JsonParser::Node(""), *child2 = new JsonParser::Node("");
     child1->SetValue("\"ABC\"");
     root.SetArray(child1);
     child2->SetValue("\"DEF\"");
     root.SetArray(child2);
-    std::cout << root << std::endl;
-    ASSERT_TRUE(true);
+    std::stringstream ss;
+    ss << root;
+    ASSERT_EQ(ss.str(), "[\"ABC\",\"DEF\"]");
 }
 
-TEST(JsonParserTest, NodeTest4) {
+TEST(JsonParserTest, NodeHappyTest4) {
     JsonParser::Node root("");
     root.SetValue("\"ABC\"");
-    std::cout << root << std::endl;
-    ASSERT_TRUE(true);
+    std::stringstream ss;
+    ss << root;
+    ASSERT_EQ(ss.str(), "\"ABC\"");
 }
 
-TEST(JsonParserTest, NodeTest8) {
+TEST(JsonParserTest, NodeHappyTest8) {
     JsonParser::Node root("");
     JsonParser::Node *child1 = new JsonParser::Node("\"user_info\"");
     JsonParser::Node *child11 = new JsonParser::Node("\"user_id\""), *child12 = new JsonParser::Node("\"user_name\"");
@@ -48,11 +53,12 @@ TEST(JsonParserTest, NodeTest8) {
     child12->SetValue("\"Yamada Taro\"");
     child1->SetChild(child12);
     root.SetChild(child1);
-    std::cout << root << std::endl;
-    ASSERT_TRUE(true);
+    std::stringstream ss;
+    ss << root;
+    ASSERT_EQ(ss.str(), "{\"user_info\":{\"user_id\":\"A1234567\",\"user_name\":\"Yamada Taro\"}}");
 }
 
-TEST(JsonParserTest, LexicalTest9) {
+TEST(JsonParserTest, NodeHappyTest9) {
     JsonParser::Node root("");
     JsonParser::Node *child1 = new JsonParser::Node("\"color_list\"");
     JsonParser::Node *child11 = new JsonParser::Node(""), *child12 = new JsonParser::Node(""), *child13 = new JsonParser::Node("");
@@ -119,6 +125,14 @@ TEST(JsonParserTest, LexicalTest9) {
     child52->SetChild(child522);
     child5->SetArray(child52);
     root.SetChild(child5);
-    std::cout << root << std::endl;
-    ASSERT_TRUE(true);
+    std::stringstream ss;
+    ss << root;
+    ASSERT_EQ(ss.str(), "{\"color_list\":[\"red\",\"green\",\"blue\"],\"num_list\":[123,456,789],\"mix_list\":[\"red\",456,null,true],\"array_list\":[[12,23],[34,45],[56,67]],\"object_list\":[{\"name\":\"Tanaka\",\"age\":26},{\"name\":\"Suzuki\",\"age\":32}]}");
+}
+
+// Unhappy path testing
+TEST(JsonParserTest, NodeUnhappyTest1) {
+    JsonParser::Node root("\"name\"");
+    std::stringstream ss;
+    EXPECT_ANY_THROW(ss << root);
 }

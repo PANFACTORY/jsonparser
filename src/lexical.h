@@ -63,7 +63,7 @@ namespace JsonParser {
                 }
                 str = str.substr(0, str.find_last_not_of(" \f\t\v\r\n") + 1);
                 if (str != "true" && str != "false" && str != "null") {
-                    throw std::runtime_error("At LexicalAnalyzer(): \"str\" is neither true, false or null.");
+                    throw std::runtime_error("At LexicalAnalyzer(): \"str\" is neither true, false nor null.");
                 }
                 chs.push_back(str);
             } else {
