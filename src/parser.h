@@ -30,8 +30,10 @@ namespace JsonParser {
      * @return      int                                 Updated position in token array
      */
     int Array(int index, const std::vector<std::string> &chs, Node *parent) {
-        std::cout << "Array() is called and index is " << index << std::endl;
-        // TODO: indexがchs.sizeを越えていないかチェック
+        if (index >= chs.size()) {
+            throw std::range_error("At Array(): \"index\" is over length of \"chs\".");
+        }
+        // std::cout << "Array() is called and index is " << index << std::endl;
         switch (chs[index][0]) {
         case ']':
             parent->SetArray();
@@ -58,9 +60,8 @@ namespace JsonParser {
             int index_current = Value(index, chs, child);
             parent->SetArray(child);
 
-            while (chs[index_current][0] == ',') {
+            while (index_current < chs.size() && chs[index_current][0] == ',') {
                 index_current += 1;
-                // TODO: chs[index_current][0]のチェック
                 child = new Node("");
                 index_current = Value(index_current, chs, child);
                 parent->SetArray(child);
@@ -69,10 +70,9 @@ namespace JsonParser {
             return index_current + 1;
             }
         default:
-            std::cout << "default at Array() and index is " << index << std::endl;
+            throw std::range_error("At Array(): Unexpected error occurs.");
             return 0;
         }
-        return 0;
     }
 
     /**
@@ -84,8 +84,10 @@ namespace JsonParser {
      * @return      int                                 Updated position in token array
      */
     int Object(int index, const std::vector<std::string> &chs, Node *parent) {
-        // TODO: indexがchs.sizeを越えていないかチェック
-        std::cout << "Object() is called and index is " << index << std::endl;
+        if (index >= chs.size()) {
+            throw std::range_error("At Object(): \"index\" is over length of \"chs\".");
+        }
+        // std::cout << "Object() is called and index is " << index << std::endl;
         switch (chs[index][0]) {
         case '}':
             parent->SetChild();
@@ -96,10 +98,13 @@ namespace JsonParser {
             int index_current = Value(index + 2, chs, child);
             parent->SetChild(child);
 
-            while (chs[index_current][0] == ',') {
+            while (index_current < chs.size() && chs[index_current][0] == ',') {
                 index_current += 1;
-                // TODO: chs[index_current][0]のチェック
+                if (index_current >= chs.size()) {
+                    throw std::range_error("At Object(): \"index\" is over length of \"chs\".");
+                }
                 child = new Node(chs[index_current]);
+                // TODO: Check exists ":" between "key" and Value.
                 index_current = Value(index_current + 2, chs, child);
                 parent->SetChild(child);
             }
@@ -107,7 +112,7 @@ namespace JsonParser {
             return index_current + 1;
             }
         default:
-            std::cout << "default at Object() and index is " << index << std::endl;
+            throw std::range_error("At Object(): Unexpected error occurs.");
             return 0;
         }
     }
@@ -121,8 +126,10 @@ namespace JsonParser {
      * @return      int                                 Updated position in token array
      */
     int Value(int index, const std::vector<std::string> &chs, Node *node) {
-        // TODO: indexがchs.sizeを越えていないかチェック
-        std::cout << "Value() is called and index is " << index << std::endl;
+        if (index >= chs.size()) {
+            throw std::range_error("At Value(): \"index\" is over length of \"chs\".");
+        }
+        // std::cout << "Value() is called and index is " << index << std::endl;
         switch (chs[index][0]) {
         case '"':
         case '-':
@@ -146,7 +153,7 @@ namespace JsonParser {
         case '[':
             return Array(index + 1, chs, node);
         default:
-            std::cout << "default at Value() and index is " << index << std::endl;
+            throw std::range_error("At Value(): Unexpected error occurs.");
             return 0;
         }
     }

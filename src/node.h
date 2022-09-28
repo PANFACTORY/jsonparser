@@ -19,7 +19,7 @@ namespace JsonParser {
     class Node;
 }
 
-std::ostream& operator<<(std::ostream& stream, const JsonParser::Node& node);
+inline std::ostream& operator<<(std::ostream& stream, const JsonParser::Node& node);
 
 namespace JsonParser {
     /**
@@ -58,8 +58,16 @@ public:
          */
         void SetValue(std::string _value) {
             this->value = _value;
+            if (this->isvalueset) {
+                throw std::runtime_error("At SetValue() in Node class: Value is set to node set value.");
+            }
             this->isvalueset = true;
-            // TODO: 既にオブジェクトや配列がセットされている場合にはエラーを出す。
+            if (this->ischildrenset) {
+                throw std::runtime_error("At SetValue() in Node class: Value is set to node set object.");
+            }
+            if (this->isarrayset) {
+                throw std::runtime_error("At SetValue() in Node class: Value is set to node set array.");
+            }
         }
 
         /**
@@ -68,7 +76,12 @@ public:
          */
         void SetChild() {
             this->ischildrenset = true;
-            // TODO: 既に値や配列がセットされている場合にはエラーを出す。
+            if (this->isvalueset) {
+                throw std::runtime_error("At SetValue() in Node class: Object is set to node set value.");
+            }
+            if (this->isarrayset) {
+                throw std::runtime_error("At SetValue() in Node class: Object is set to node set array.");
+            }
         }
 
         /**
@@ -79,7 +92,12 @@ public:
         void SetChild(Node* _node) {
             this->children.push_back(_node);
             this->ischildrenset = true;
-            // TODO: 既に値や配列がセットされている場合にはエラーを出す。
+            if (this->isvalueset) {
+                throw std::runtime_error("At SetValue() in Node class: Object is set to node set value.");
+            }
+            if (this->isarrayset) {
+                throw std::runtime_error("At SetValue() in Node class: Object is set to node set array.");
+            }
         }
 
         /**
@@ -88,7 +106,12 @@ public:
          */
         void SetArray() {
             this->isarrayset = true;
-            // TODO: 既に値やオブジェクトがセットされている場合にはエラーを出す。
+            if (this->isvalueset) {
+                throw std::runtime_error("At SetValue() in Node class: Array is set to node set value.");
+            }
+            if (this->ischildrenset) {
+                throw std::runtime_error("At SetValue() in Node class: Array is set to node set object.");
+            }
         }
 
         /**
@@ -99,7 +122,12 @@ public:
         void SetArray(Node* _node) {
             this->children_array.push_back(_node);
             this->isarrayset = true;
-            // TODO: 既に値やオブジェクトがセットされている場合にはエラーを出す。
+            if (this->isvalueset) {
+                throw std::runtime_error("At SetValue() in Node class: Array is set to node set value.");
+            }
+            if (this->ischildrenset) {
+                throw std::runtime_error("At SetValue() in Node class: Array is set to node set object.");
+            }
         }
 
 private:
@@ -116,7 +144,7 @@ private:
  * @param[in]   const JsonParser::Node& node    Pointer indicating the root AST node
  * @return      std::ostream&                   Stream updated
  */
-std::ostream& operator<<(std::ostream& stream, const JsonParser::Node& node) {
+inline std::ostream& operator<<(std::ostream& stream, const JsonParser::Node& node) {
     if (node.key != "") {
         stream << node.key << ":";
     }
@@ -141,7 +169,7 @@ std::ostream& operator<<(std::ostream& stream, const JsonParser::Node& node) {
         }
         stream << "]";
     } else {
-        // TODO: ここでエラーを出す。
+        throw std::runtime_error("At operator<< of Node class: \"node\" is set neither value, object nor array.");
     }
     return stream;
 }
