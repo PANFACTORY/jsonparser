@@ -61,9 +61,8 @@ namespace JsonParser {
             parent->SetArray(child);
 
             while (index_current < chs.size() && chs[index_current][0] == ',') {
-                index_current += 1;
                 child = new Node("");
-                index_current = Value(index_current, chs, child);
+                index_current = Value(index_current + 1, chs, child);
                 parent->SetArray(child);
             }
 
@@ -99,13 +98,24 @@ namespace JsonParser {
             parent->SetChild(child);
 
             while (index_current < chs.size() && chs[index_current][0] == ',') {
-                index_current += 1;
-                if (index_current >= chs.size()) {
+                // Check exists "key" of next object.
+                if (index_current + 1 >= chs.size()) {
                     throw std::range_error("At Object(): \"index\" is over length of \"chs\".");
                 }
-                child = new Node(chs[index_current]);
-                // TODO: Check exists ":" between "key" and Value.
-                index_current = Value(index_current + 2, chs, child);
+                if (chs[index_current + 1][0] != '"') {
+                    throw std::runtime_error("At Object(): '\"' is expected, however other character is set.");
+                }
+                child = new Node(chs[index_current + 1]);
+
+                // Check exists ":" between "key" and Value.
+                if (index_current + 2 >= chs.size()) {
+                    throw std::range_error("At Object(): \"index\" is over length of \"chs\".");
+                }
+                if (chs[index_current + 2][0] != ':') {
+                    throw std::runtime_error("At Object(): \":\" is expected, however other character is set.");
+                }
+
+                index_current = Value(index_current + 3, chs, child);
                 parent->SetChild(child);
             }
 
