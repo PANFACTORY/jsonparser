@@ -19,7 +19,7 @@ namespace JsonParser {
     class Node;
 }
 
-std::ostream& operator<<(std::ostream& stream, const JsonParser::Node& node);
+inline std::ostream& operator<<(std::ostream& stream, const JsonParser::Node& node);
 
 namespace JsonParser {
     /**
@@ -144,7 +144,7 @@ private:
  * @param[in]   const JsonParser::Node& node    Pointer indicating the root AST node
  * @return      std::ostream&                   Stream updated
  */
-std::ostream& operator<<(std::ostream& stream, const JsonParser::Node& node) {
+inline std::ostream& operator<<(std::ostream& stream, const JsonParser::Node& node) {
     if (node.key != "") {
         stream << node.key << ":";
     }

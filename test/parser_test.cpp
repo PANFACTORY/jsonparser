@@ -12,7 +12,7 @@ TEST(JsonParserTest, ParserTest1) {
     };
     JsonParser::Node root("");
     ASSERT_EQ(JsonParser::Value(0, chs, &root), chs.size());
-    std::cout << root << std::endl;
+    // std::cout << root << std::endl;
 }
 
 TEST(JsonParserTest, ParserTest2) {
@@ -29,7 +29,7 @@ TEST(JsonParserTest, ParserTest2) {
     };
     JsonParser::Node root("");
     ASSERT_EQ(JsonParser::Value(0, chs, &root), chs.size());
-    std::cout << root << std::endl;
+    // std::cout << root << std::endl;
 }
 
 TEST(JsonParserTest, ParserTest3) {
@@ -42,7 +42,7 @@ TEST(JsonParserTest, ParserTest3) {
     };
     JsonParser::Node root("");
     ASSERT_EQ(JsonParser::Value(0, chs, &root), chs.size());
-    std::cout << root << std::endl;
+    // std::cout << root << std::endl;
 }
 
 TEST(JsonParserTest, ParserTest4) {
@@ -51,7 +51,7 @@ TEST(JsonParserTest, ParserTest4) {
     };
     JsonParser::Node root("");
     ASSERT_EQ(JsonParser::Value(0, chs, &root), chs.size());
-    std::cout << root << std::endl;
+    // std::cout << root << std::endl;
 }
 
 TEST(JsonParserTest, ParserTest5) {
@@ -60,7 +60,7 @@ TEST(JsonParserTest, ParserTest5) {
     };
     JsonParser::Node root("");
     ASSERT_EQ(JsonParser::Value(0, chs, &root), chs.size());
-    std::cout << root << std::endl;
+    // std::cout << root << std::endl;
 }
 
 TEST(JsonParserTest, ParserTest6) {
@@ -85,7 +85,7 @@ TEST(JsonParserTest, ParserTest6) {
     };
     JsonParser::Node root("");
     ASSERT_EQ(JsonParser::Value(0, chs, &root), chs.size());
-    std::cout << root << std::endl;
+    // std::cout << root << std::endl;
 }
 
 TEST(JsonParserTest, ParserTest7) {
@@ -106,7 +106,7 @@ TEST(JsonParserTest, ParserTest7) {
     };
     JsonParser::Node root("");
     ASSERT_EQ(JsonParser::Value(0, chs, &root), chs.size());
-    std::cout << root << std::endl;
+    // std::cout << root << std::endl;
 }
 
 TEST(JsonParserTest, ParserTest8) {
@@ -127,7 +127,7 @@ TEST(JsonParserTest, ParserTest8) {
     };
     JsonParser::Node root("");
     ASSERT_EQ(JsonParser::Value(0, chs, &root), chs.size());
-    std::cout << root << std::endl;
+    // std::cout << root << std::endl;
 }
 
 TEST(JsonParserTest, ParserTest9) {
@@ -214,5 +214,5 @@ TEST(JsonParserTest, ParserTest9) {
     };
     JsonParser::Node root("");
     ASSERT_EQ(JsonParser::Value(0, chs, &root), chs.size());
-    std::cout << root << std::endl;
+    // std::cout << root << std::endl;
 }

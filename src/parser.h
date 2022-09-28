@@ -33,7 +33,7 @@ namespace JsonParser {
         if (index >= chs.size()) {
             throw std::range_error("At Array(): \"index\" is over length of \"chs\".");
         }
-        std::cout << "Array() is called and index is " << index << std::endl;
+        // std::cout << "Array() is called and index is " << index << std::endl;
         switch (chs[index][0]) {
         case ']':
             parent->SetArray();
@@ -87,7 +87,7 @@ namespace JsonParser {
         if (index >= chs.size()) {
             throw std::range_error("At Object(): \"index\" is over length of \"chs\".");
         }
-        std::cout << "Object() is called and index is " << index << std::endl;
+        // std::cout << "Object() is called and index is " << index << std::endl;
         switch (chs[index][0]) {
         case '}':
             parent->SetChild();
@@ -129,7 +129,7 @@ namespace JsonParser {
         if (index >= chs.size()) {
             throw std::range_error("At Value(): \"index\" is over length of \"chs\".");
         }
-        std::cout << "Value() is called and index is " << index << std::endl;
+        // std::cout << "Value() is called and index is " << index << std::endl;
         switch (chs[index][0]) {
         case '"':
         case '-':
