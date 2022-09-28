@@ -28,10 +28,17 @@ namespace JsonParser {
         std::vector<std::string> chs;
         char ch = ss.get();
         while (!ss.eof()) {
-            if (std::isspace(ch)) {
+            switch (ch) {
+            case ' ':
+            case '\f':
+            case '\t':
+            case '\v':
+            case '\r':
+            case '\n':
                 ch = ss.get();
-                continue;
-            } else if (ch == '"') {
+                break;
+            case '"':
+                {
                 std::string str("\"");
                 ch = ss.get();
                 // TODO: "で閉じているかで判別する
@@ -42,7 +49,20 @@ namespace JsonParser {
                 str = str.substr(0, str.find_last_not_of(" \f\t\v\r\n") + 1);
                 // TODO: Check end of str is \".
                 chs.push_back(str);
-            } else if (std::isdigit(ch) || ch == '-') {
+                }
+                break;
+            case '-':
+            case '0':
+            case '1':
+            case '2':
+            case '3':
+            case '4':
+            case '5':
+            case '6':
+            case '7':
+            case '8':
+            case '9':
+                {
                 std::string str(&ch);
                 ch = ss.get();
                 while (!ss.eof() && ch != '}' && ch != ',' && ch != ']') {
@@ -54,7 +74,12 @@ namespace JsonParser {
                     throw std::runtime_error("At LexicalAnalyzer(): \"str\" is not a number.");
                 }
                 chs.push_back(str);
-            } else if (ch == 't' || ch == 'f' || ch == 'n') {
+                }
+                break;
+            case 't':
+            case 'f':
+            case 'n':
+                {
                 std::string str(&ch);
                 ch = ss.get();
                 while (!ss.eof() && ch != '}' && ch != ',' && ch != ']') {
@@ -66,9 +91,12 @@ namespace JsonParser {
                     throw std::runtime_error("At LexicalAnalyzer(): \"str\" is neither true, false nor null.");
                 }
                 chs.push_back(str);
-            } else {
+                }
+                break;
+            default:
                 chs.push_back(std::string(&ch));
                 ch = ss.get();
+                break;
             }
         }
         return chs;
