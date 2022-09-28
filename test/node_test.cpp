@@ -136,3 +136,77 @@ TEST(JsonParserTest, NodeUnhappyTest1) {
     std::stringstream ss;
     EXPECT_ANY_THROW(ss << root);
 }
+
+TEST(JsonParserTest, NodeUnhappyTest2) {
+    JsonParser::Node root("\"name\"");
+    root.SetValue("\"Tanaka\"");
+    EXPECT_ANY_THROW(root.SetValue("\"Tanaka\""));
+}
+
+TEST(JsonParserTest, NodeUnhappyTest3) {
+    JsonParser::Node root("\"name\"");
+    JsonParser::Node *child = new JsonParser::Node("\"name\"");
+    root.SetChild(child);
+    EXPECT_ANY_THROW(root.SetValue("\"Tanaka\""));
+}
+
+TEST(JsonParserTest, NodeUnhappyTest4) {
+    JsonParser::Node root("\"name\"");
+    JsonParser::Node *child = new JsonParser::Node("\"name\"");
+    root.SetArray(child);
+    EXPECT_ANY_THROW(root.SetValue("\"Tanaka\""));
+}
+
+TEST(JsonParserTest, NodeUnhappyTest5) {
+    JsonParser::Node root("\"name\"");
+    root.SetValue("\"Tanaka\"");
+    EXPECT_ANY_THROW(root.SetChild());
+}
+
+TEST(JsonParserTest, NodeUnhappyTest6) {
+    JsonParser::Node root("\"name\"");
+    JsonParser::Node *child1 = new JsonParser::Node("\"name\"");
+    root.SetArray(child1);
+    EXPECT_ANY_THROW(root.SetChild());
+}
+
+TEST(JsonParserTest, NodeUnhappyTest7) {
+    JsonParser::Node root("\"name\"");
+    root.SetValue("\"Tanaka\"");
+    JsonParser::Node *child = new JsonParser::Node("\"name\"");
+    EXPECT_ANY_THROW(root.SetChild(child));
+}
+
+TEST(JsonParserTest, NodeUnhappyTest8) {
+    JsonParser::Node root("\"name\"");
+    JsonParser::Node *child1 = new JsonParser::Node("\"name\""), *child2 = new JsonParser::Node("\"name\"");
+    root.SetArray(child1);
+    EXPECT_ANY_THROW(root.SetChild(child2));
+}
+
+TEST(JsonParserTest, NodeUnhappyTest9) {
+    JsonParser::Node root("\"name\"");
+    root.SetValue("\"Tanaka\"");
+    EXPECT_ANY_THROW(root.SetArray());
+}
+
+TEST(JsonParserTest, NodeUnhappyTest10) {
+    JsonParser::Node root("\"name\"");
+    JsonParser::Node *child1 = new JsonParser::Node("\"name\"");
+    root.SetChild(child1);
+    EXPECT_ANY_THROW(root.SetArray());
+}
+
+TEST(JsonParserTest, NodeUnhappyTest11) {
+    JsonParser::Node root("\"name\"");
+    root.SetValue("\"Tanaka\"");
+    JsonParser::Node *child = new JsonParser::Node("\"name\"");
+    EXPECT_ANY_THROW(root.SetArray(child));
+}
+
+TEST(JsonParserTest, NodeUnhappyTest12) {
+    JsonParser::Node root("\"name\"");
+    JsonParser::Node *child1 = new JsonParser::Node("\"name\""), *child2 = new JsonParser::Node("\"name\"");
+    root.SetChild(child1);
+    EXPECT_ANY_THROW(root.SetArray(child2));
+}
