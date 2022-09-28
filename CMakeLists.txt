@@ -13,7 +13,7 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(googletest)
 enable_testing()
 
-add_executable(JsonParserTest test/node_test.cpp)
+add_executable(JsonParserTest test/parser_test.cpp)
 target_link_libraries(JsonParserTest gtest_main)
 
 include(GoogleTest)
