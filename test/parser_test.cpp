@@ -10,9 +10,7 @@ TEST(JsonParserTest, ParserTest1) {
         "\"Tanaka\"",
         "}"
     };
-    JsonParser::Node root("");
-    ASSERT_EQ(JsonParser::Value(0, chs, &root), chs.size());
-    // std::cout << root << std::endl;
+    ASSERT_NO_THROW(JsonParser::Parser(chs));
 }
 
 TEST(JsonParserTest, ParserTest2) {
@@ -27,9 +25,7 @@ TEST(JsonParserTest, ParserTest2) {
         "26",
         "}"
     };
-    JsonParser::Node root("");
-    ASSERT_EQ(JsonParser::Value(0, chs, &root), chs.size());
-    // std::cout << root << std::endl;
+    ASSERT_NO_THROW(JsonParser::Parser(chs));
 }
 
 TEST(JsonParserTest, ParserTest3) {
@@ -40,27 +36,21 @@ TEST(JsonParserTest, ParserTest3) {
         "\"DEF\"",
         "]"
     };
-    JsonParser::Node root("");
-    ASSERT_EQ(JsonParser::Value(0, chs, &root), chs.size());
-    // std::cout << root << std::endl;
+    ASSERT_NO_THROW(JsonParser::Parser(chs));
 }
 
 TEST(JsonParserTest, ParserTest4) {
     std::vector<std::string> chs = {
         "\"ABC\""
     };
-    JsonParser::Node root("");
-    ASSERT_EQ(JsonParser::Value(0, chs, &root), chs.size());
-    // std::cout << root << std::endl;
+    ASSERT_NO_THROW(JsonParser::Parser(chs));
 }
 
 TEST(JsonParserTest, ParserTest5) {
     std::vector<std::string> chs = {
         "123"
     };
-    JsonParser::Node root("");
-    ASSERT_EQ(JsonParser::Value(0, chs, &root), chs.size());
-    // std::cout << root << std::endl;
+    ASSERT_NO_THROW(JsonParser::Parser(chs));
 }
 
 TEST(JsonParserTest, ParserTest6) {
@@ -83,9 +73,7 @@ TEST(JsonParserTest, ParserTest6) {
         "-123",
         "}"
     };
-    JsonParser::Node root("");
-    ASSERT_EQ(JsonParser::Value(0, chs, &root), chs.size());
-    // std::cout << root << std::endl;
+    ASSERT_NO_THROW(JsonParser::Parser(chs));
 }
 
 TEST(JsonParserTest, ParserTest7) {
@@ -104,9 +92,7 @@ TEST(JsonParserTest, ParserTest7) {
         "false",
         "}"
     };
-    JsonParser::Node root("");
-    ASSERT_EQ(JsonParser::Value(0, chs, &root), chs.size());
-    // std::cout << root << std::endl;
+    ASSERT_NO_THROW(JsonParser::Parser(chs));
 }
 
 TEST(JsonParserTest, ParserTest8) {
@@ -125,9 +111,7 @@ TEST(JsonParserTest, ParserTest8) {
         "}",
         "}"
     };
-    JsonParser::Node root("");
-    ASSERT_EQ(JsonParser::Value(0, chs, &root), chs.size());
-    // std::cout << root << std::endl;
+    ASSERT_NO_THROW(JsonParser::Parser(chs));
 }
 
 TEST(JsonParserTest, ParserTest9) {
@@ -212,7 +196,5 @@ TEST(JsonParserTest, ParserTest9) {
         "]",
         "}"
     };
-    JsonParser::Node root("");
-    ASSERT_EQ(JsonParser::Value(0, chs, &root), chs.size());
-    // std::cout << root << std::endl;
+    ASSERT_NO_THROW(JsonParser::Parser(chs));
 }
