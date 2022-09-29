@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.4"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>JsonParser: parser.h File Reference</title>
+<title>JsonParser: JsonParser::Grammar Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -60,58 +60,57 @@ $(function() {
 </iframe>
 </div>
 
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><b>JsonParser</b></li><li class="navelem"><a class="el" href="class_json_parser_1_1_grammar.html">Grammar</a></li>  </ul>
+</div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
-<a href="#func-members">Functions</a>  </div>
-  <div class="headertitle"><div class="title">parser.h File Reference</div></div>
+<a href="#friends">Friends</a> &#124;
+<a href="class_json_parser_1_1_grammar-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">JsonParser::Grammar Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Parser of JSON.  
-<a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;vector&gt;</code><br />
-<code>#include &lt;string&gt;</code><br />
-<code>#include &quot;<a class="el" href="node_8h_source.html">node.h</a>&quot;</code><br />
-</div>
-<p><a href="parser_8h_source.html">Go to the source code of this file.</a></p>
+<p>Definition of generative grammar.  
+ <a href="class_json_parser_1_1_grammar.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="parser_8h_source.html">parser.h</a>&gt;</code></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_json_parser_1_1_grammar.html">JsonParser::Grammar</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Definition of generative grammar.  <a href="class_json_parser_1_1_grammar.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:ae7087074785a01a8a09f527afa15cc00"><td class="memItemLeft" align="right" valign="top">Node *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_8h.html#ae7087074785a01a8a09f527afa15cc00">JsonParser::Parser</a> (const std::vector&lt; std::string &gt; &amp;chs)</td></tr>
-<tr class="memdesc:ae7087074785a01a8a09f527afa15cc00"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate AST from token array with recursive descent parsing.  <a href="parser_8h.html#ae7087074785a01a8a09f527afa15cc00">More...</a><br /></td></tr>
-<tr class="separator:ae7087074785a01a8a09f527afa15cc00"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
+Friends</h2></td></tr>
+<tr class="memitem:a3373ce60657c3a94afcd0c83bc7f7b15"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_json_parser_1_1_node.html">Node</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_json_parser_1_1_grammar.html#a3373ce60657c3a94afcd0c83bc7f7b15">Parser</a> (const std::vector&lt; std::string &gt; &amp;chs)</td></tr>
+<tr class="memdesc:a3373ce60657c3a94afcd0c83bc7f7b15"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate AST from token array with recursive descent parsing.  <a href="class_json_parser_1_1_grammar.html#a3373ce60657c3a94afcd0c83bc7f7b15">More...</a><br /></td></tr>
+<tr class="separator:a3373ce60657c3a94afcd0c83bc7f7b15"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p >Parser of JSON. </p>
-<dl class="section author"><dt>Author</dt><dd>PANFACTORY (github.com/PANFACTORY) </dd></dl>
-<dl class="section version"><dt>Version</dt><dd>0.1 </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>2022-09-28</dd></dl>
-<dl class="section copyright"><dt>Copyright</dt><dd>Copyright (c) 2022 </dd></dl>
+<div class="textblock"><p >Definition of generative grammar. </p>
 
-<p class="definition">Definition in file <a class="el" href="parser_8h_source.html">parser.h</a>.</p>
-</div><h2 class="groupheader">Function Documentation</h2>
-<a id="ae7087074785a01a8a09f527afa15cc00" name="ae7087074785a01a8a09f527afa15cc00"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae7087074785a01a8a09f527afa15cc00">&#9670;&nbsp;</a></span>Parser()</h2>
+<p class="definition">Definition at line <a class="el" href="parser_8h_source.html#l00024">24</a> of file <a class="el" href="parser_8h_source.html">parser.h</a>.</p>
+</div><h2 class="groupheader">Friends And Related Function Documentation</h2>
+<a id="a3373ce60657c3a94afcd0c83bc7f7b15" name="a3373ce60657c3a94afcd0c83bc7f7b15"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3373ce60657c3a94afcd0c83bc7f7b15">&#9670;&nbsp;</a></span>Parser</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">Node * JsonParser::Parser </td>
+          <td class="memname"><a class="el" href="class_json_parser_1_1_node.html">Node</a> * Parser </td>
           <td>(</td>
           <td class="paramtype">const std::vector&lt; std::string &gt; &amp;&#160;</td>
           <td class="paramname"><em>chs</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Generate AST from token array with recursive descent parsing. </p>
@@ -127,6 +126,9 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="parser_8h_source.html">parser.h</a></li>
+</ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
