@@ -24,7 +24,7 @@ namespace JsonParser {
      * @param[in]   std::istream& ss            JSON format stream
      * @return      std::vector<std::string>    Token array
      */
-    std::vector<std::string> LexicalAnalyzer(std::istream& ss) {
+    inline std::vector<std::string> LexicalAnalyzer(std::istream& ss) {
         std::vector<std::string> chs;
         char ch = ss.get();
         while (!ss.eof()) {

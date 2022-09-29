@@ -32,10 +32,11 @@ int main() {
 }
 ```
 
-例えばWindowsでClangを用いる場合、以下のコマンドでビルド、実行します。
+例えばWindowsでClangを用いる場合、以下のコマンドでビルド、実行します。  
+なお、`<Your Include Path>`は使用される環境に合わせて設定してください。
 
 ```
-clang++ ./main.cpp ./src/lexical.cpp ./src/parser.cpp
+clang++ -I <Your Include Path> ./main.cpp
 ./a.exe
 ```
 

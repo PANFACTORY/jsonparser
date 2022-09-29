@@ -178,7 +178,7 @@ private:
      * @param[in]   const std::vector<std::string> &chs Token array from lexical analyzer
      * @return      JsonParser::Node*                   Pointer indicating the root AST node
      */
-    Node* Parser(const std::vector<std::string> &chs) {
+    inline Node* Parser(const std::vector<std::string> &chs) {
         Node* root = new Node("");
         if (Grammar::Value(0, chs, root) != chs.size()) {
             throw std::runtime_error("At Parser(): Return value of Value() is not equal to chs.size().");
