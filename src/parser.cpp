@@ -1,7 +1,7 @@
 /**
  * @file parser.cpp
  * @author PANFACTORY (github.com/PANFACTORY)
- * @brief Parser of JSON
+ * @brief Implementation of Parser()
  * @version 0.1
  * @date 2022-09-28
  *

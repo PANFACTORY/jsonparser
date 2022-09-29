@@ -1,7 +1,7 @@
 /**
  * @file lexical.cpp
  * @author PANFACTORY (github.com/PANFACTORY)
- * @brief Lexical analyzer of JSON
+ * @brief Implementation of LexicalAnalyzer()
  * @version 0.1
  * @date 2022-09-27
  *
