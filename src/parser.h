@@ -36,7 +36,7 @@ namespace JsonParser {
         // std::cout << "Array() is called and index is " << index << std::endl;
         switch (chs[index][0]) {
         case ']':
-            parent->SetArray();
+            parent->AppendArray();
             return index + 1;
         case '"':
         case '-':
@@ -58,12 +58,12 @@ namespace JsonParser {
             {
             Node* child = new Node("");
             int index_current = Value(index, chs, child);
-            parent->SetArray(child);
+            parent->AppendArray(child);
 
             while (index_current < chs.size() && chs[index_current][0] == ',') {
                 child = new Node("");
                 index_current = Value(index_current + 1, chs, child);
-                parent->SetArray(child);
+                parent->AppendArray(child);
             }
 
             return index_current + 1;
@@ -89,13 +89,13 @@ namespace JsonParser {
         // std::cout << "Object() is called and index is " << index << std::endl;
         switch (chs[index][0]) {
         case '}':
-            parent->SetChild();
+            parent->AppendChild();
             return index + 1;
         case '"':
             {
             Node* child = new Node(chs[index]);
             int index_current = Value(index + 2, chs, child);
-            parent->SetChild(child);
+            parent->AppendChild(child);
 
             while (index_current < chs.size() && chs[index_current][0] == ',') {
                 // Check exists "key" of next object.
@@ -116,7 +116,7 @@ namespace JsonParser {
                 }
 
                 index_current = Value(index_current + 3, chs, child);
-                parent->SetChild(child);
+                parent->AppendChild(child);
             }
 
             return index_current + 1;
@@ -167,7 +167,9 @@ namespace JsonParser {
             return 0;
         }
     }
+}
 
+namespace JsonParser {
     /**
      * @brief       Generate AST from token array with recursive descent parsing.
      *
