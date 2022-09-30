@@ -1,5 +1,5 @@
 /**
- * @file lexical.h
+ * @file lexer.h
  * @author PANFACTORY (github.com/PANFACTORY)
  * @brief Lexical analyzer of JSON
  * @version 0.1
@@ -24,7 +24,7 @@ namespace JsonParser {
      * @param[in]   std::istream& ss            JSON format stream
      * @return      std::vector<std::string>    Token array
      */
-    inline std::vector<std::string> LexicalAnalyzer(std::istream& ss) {
+    inline std::vector<std::string> Lexer(std::istream& ss) {
         std::vector<std::string> chs;
         char ch = ss.get();
         while (!ss.eof()) {
@@ -41,14 +41,16 @@ namespace JsonParser {
                 {
                 std::string str("\"");
                 ch = ss.get();
-                // TODO: "で閉じているかで判別する
-                while (!ss.eof() && ch != ':' && ch != '}' && ch != ',' && ch != ']') {
+                char pre_ch = '"';
+                while (!ss.eof() && !(pre_ch != '\\' && ch == '"')) {
                     str += ch;
+                    pre_ch = ch;
                     ch = ss.get();
                 }
-                str = str.substr(0, str.find_last_not_of(" \f\t\v\r\n") + 1);
-                // TODO: Check end of str is \".
-                chs.push_back(str);
+                chs.push_back(str + ch);
+                if (!ss.eof()) {
+                    ch = ss.get();
+                }
                 }
                 break;
             case '-':
