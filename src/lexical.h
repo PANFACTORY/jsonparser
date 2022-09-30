@@ -41,14 +41,14 @@ namespace JsonParser {
                 {
                 std::string str("\"");
                 ch = ss.get();
-                // TODO: "で閉じているかで判別する
-                while (!ss.eof() && ch != ':' && ch != '}' && ch != ',' && ch != ']') {
+                char pre_ch = '"';
+                while (!ss.eof() && !(pre_ch != '\\' && ch == '"')) {
                     str += ch;
+                    pre_ch = ch;
                     ch = ss.get();
                 }
-                str = str.substr(0, str.find_last_not_of(" \f\t\v\r\n") + 1);
-                // TODO: Check end of str is \".
-                chs.push_back(str);
+                chs.push_back(str + ch);
+                ch = ss.get();
                 }
                 break;
             case '-':
