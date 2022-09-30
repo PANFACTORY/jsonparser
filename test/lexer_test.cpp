@@ -39,34 +39,10 @@ TEST(JsonParserTest, LexicalHappyTest6) {
     ASSERT_EQ(JsonParser::Lexer(ss).size(), 17);
 }
 
-TEST(JsonParserTest, LexicalHappyTest6_1) {
-    std::stringstream ss;
-    ss << R"({ "pi": 5.14 })";
-    ASSERT_EQ(JsonParser::Lexer(ss).size(), 5);
-}
-
-TEST(JsonParserTest, LexicalHappyTest6_2) {
-    std::stringstream ss;
-    ss << R"({ "pi": 35.14 })";
-    ASSERT_EQ(JsonParser::Lexer(ss).size(), 5);
-}
-
 TEST(JsonParserTest, LexicalHappyTest7) {
     std::stringstream ss;
     ss << R"({ "name": null, "active_flag": true, "delete_flag": false })";
     ASSERT_EQ(JsonParser::Lexer(ss).size(), 13);
-}
-
-TEST(JsonParserTest, LexicalHappyTest7_1) {
-    std::stringstream ss;
-    ss << R"({ "active_flag": true, "delete_flag": false })";
-    ASSERT_EQ(JsonParser::Lexer(ss).size(), 9);
-}
-
-TEST(JsonParserTest, LexicalHappyTest7_2) {
-    std::stringstream ss;
-    ss << R"({ "delete_flag": false })";
-    ASSERT_EQ(JsonParser::Lexer(ss).size(), 5);
 }
 
 TEST(JsonParserTest, LexicalHappyTest8) {

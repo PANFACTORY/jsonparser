@@ -65,7 +65,7 @@ namespace JsonParser {
             case '8':
             case '9':
                 {
-                std::string str(&ch);
+                std::string str(1, ch);
                 ch = ss.get();
                 while (!ss.eof() && ch != '}' && ch != ',' && ch != ']') {
                     str += ch;
@@ -73,7 +73,6 @@ namespace JsonParser {
                 }
                 str = str.substr(0, str.find_last_not_of(" \f\t\v\r\n") + 1);
                 if (!std::regex_match(str, std::regex("-?(0|[1-9]\\d*)(\\.\\d+)?(e[-+](0|[1-9]\\d*)(\\.\\d+)?)?"))) {
-                    std::cout << str << std::endl;
                     throw std::runtime_error("At LexicalAnalyzer(): \"str\" is not a number.");
                 }
                 chs.push_back(str);
@@ -83,7 +82,7 @@ namespace JsonParser {
             case 'f':
             case 'n':
                 {
-                std::string str(&ch);
+                std::string str(1, ch);
                 ch = ss.get();
                 while (!ss.eof() && ch != '}' && ch != ',' && ch != ']') {
                     str += ch;
@@ -91,7 +90,6 @@ namespace JsonParser {
                 }
                 str = str.substr(0, str.find_last_not_of(" \f\t\v\r\n") + 1);
                 if (str != "true" && str != "false" && str != "null") {
-                    std::cout << str << std::endl;
                     throw std::runtime_error("At LexicalAnalyzer(): \"str\" is neither true, false nor null.");
                 }
                 chs.push_back(str);
