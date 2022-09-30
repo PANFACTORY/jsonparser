@@ -2,16 +2,16 @@ name: CMake
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "main" ]
   workflow_dispatch:
 
 env:
   BUILD_TYPE: Release
 
 jobs:
-  build:
+  test:
     timeout-minutes: 10
     runs-on: ubuntu-latest
 
