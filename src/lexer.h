@@ -65,7 +65,7 @@ namespace JsonParser {
             case '8':
             case '9':
                 {
-                std::string str(&ch);
+                std::string str(1, ch);
                 ch = ss.get();
                 while (!ss.eof() && ch != '}' && ch != ',' && ch != ']') {
                     str += ch;
@@ -82,7 +82,7 @@ namespace JsonParser {
             case 'f':
             case 'n':
                 {
-                std::string str(&ch);
+                std::string str(1, ch);
                 ch = ss.get();
                 while (!ss.eof() && ch != '}' && ch != ',' && ch != ']') {
                     str += ch;
