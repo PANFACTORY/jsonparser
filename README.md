@@ -20,14 +20,14 @@ std::istreamでJSONデータを受け取り、対応する抽象構文木を生�
 ```
 #include <iostream>
 
-#include "src/lexical.h"
+#include "src/lexer.h"
 #include "src/parser.h"
 
 using namespace std;
 using namespace JsonParser;
 
 int main() {
-    cout << Parser(LexicalAnalyzer(cin))->Str() << std::endl;
+    cout << Parser(Lexer(cin))->Str() << std::endl;
     return 0;
 }
 ```

@@ -1,5 +1,5 @@
 /**
- * @file lexical.h
+ * @file lexer.h
  * @author PANFACTORY (github.com/PANFACTORY)
  * @brief Lexical analyzer of JSON
  * @version 0.1
@@ -24,7 +24,7 @@ namespace JsonParser {
      * @param[in]   std::istream& ss            JSON format stream
      * @return      std::vector<std::string>    Token array
      */
-    inline std::vector<std::string> LexicalAnalyzer(std::istream& ss) {
+    inline std::vector<std::string> Lexer(std::istream& ss) {
         std::vector<std::string> chs;
         char ch = ss.get();
         while (!ss.eof()) {
@@ -48,7 +48,9 @@ namespace JsonParser {
                     ch = ss.get();
                 }
                 chs.push_back(str + ch);
-                ch = ss.get();
+                if (!ss.eof()) {
+                    ch = ss.get();
+                }
                 }
                 break;
             case '-':
