@@ -1,8 +1,5 @@
 cmake_minimum_required(VERSION 3.24)
 
-SET(CMAKE_CXX_COMPILER C:/msys64/mingw64/bin/clang++.exe)
-SET(CMAKE_C_COMPILER C:/msys64/mingw64/bin/clang.exe)
-
 project(jsonparser_test CXX)
 
 include(FetchContent)
