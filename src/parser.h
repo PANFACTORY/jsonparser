@@ -92,13 +92,13 @@ private:
             // std::cout << "Object() is called and index is " << index << std::endl;
             switch (chs[index][0]) {
             case '}':
-                parent->AppendChild();
+                parent->AppendObject();
                 return index + 1;
             case '"':
                 {
-                Node* child = new Node(chs[index]);
+                Node* child = new Node(chs[index].substr(1, chs[index].size() - 2));
                 int index_current = Grammar::Value(index + 2, chs, child);
-                parent->AppendChild(child);
+                parent->AppendObject(child);
 
                 while (index_current < chs.size() && chs[index_current][0] == ',') {
                     // Check exists "key" of next object.
@@ -119,7 +119,7 @@ private:
                     }
 
                     index_current = Grammar::Value(index_current + 3, chs, child);
-                    parent->AppendChild(child);
+                    parent->AppendObject(child);
                 }
 
                 return index_current + 1;
@@ -145,6 +145,8 @@ private:
             // std::cout << "Value() is called and index is " << index << std::endl;
             switch (chs[index][0]) {
             case '"':
+                node->SetString(chs[index].substr(1, chs[index].size() - 2));
+                return index + 1;
             case '-':
             case '0':
             case '1':
@@ -156,10 +158,12 @@ private:
             case '7':
             case '8':
             case '9':
+                node->SetNumber(chs[index]);
+                return index + 1;
             case 'n':
             case 't':
             case 'f':
-                node->SetValue(chs[index]);
+                node->SetBoolNull(chs[index]);
                 return index + 1;
             case '{':
                 return Grammar::Object(index + 1, chs, node);
