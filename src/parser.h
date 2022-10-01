@@ -96,7 +96,7 @@ private:
                 return index + 1;
             case '"':
                 {
-                Node* child = new Node(chs[index]);
+                Node* child = new Node(chs[index].substr(1, chs[index].size() - 2));
                 int index_current = Grammar::Value(index + 2, chs, child);
                 parent->AppendObject(child);
 
