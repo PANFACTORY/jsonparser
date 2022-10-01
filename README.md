@@ -33,7 +33,9 @@ using namespace std;
 using namespace JsonParser;
 
 int main() {
-    cout << Parser(Lexer(cin))->Str() << std::endl;
+    Node json = Parser(Lexer(cin));
+    cout << json.Str() << endl;
+    cout << json["user_info"]["user_id"].Value() << endl;
     return 0;
 }
 ```
@@ -55,7 +57,8 @@ clang++ -I <Your Include Path> ./main.cpp
 すると、以下の結果が返されます。
 
 ```
-{"user_info":{"user_id":"A1234567","user_name":"Yamada Taro"}}
+{"user_info":{"user_id":"A1234567",""user_name"":"Yamada Taro"}}
+A1234567
 ```
 
 ## ドキュメント

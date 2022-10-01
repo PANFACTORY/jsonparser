@@ -22,7 +22,7 @@ namespace JsonParser {
      *
      */
     class Grammar {
-        friend Node* Parser(const std::vector<std::string> &chs);
+        friend Node Parser(const std::vector<std::string> &chs);
 private:
         /**
          * @brief       Process <Array> in recursive descent parser.
@@ -182,9 +182,9 @@ private:
      * @param[in]   const std::vector<std::string> &chs Token array from lexical analyzer
      * @return      JsonParser::Node*                   Pointer indicating the root AST node
      */
-    inline Node* Parser(const std::vector<std::string> &chs) {
-        Node* root = new Node("");
-        if (Grammar::Value(0, chs, root) != chs.size()) {
+    inline Node Parser(const std::vector<std::string> &chs) {
+        Node root("");
+        if (Grammar::Value(0, chs, &root) != chs.size()) {
             throw std::runtime_error("At Parser(): Return value of Value() is not equal to chs.size().");
         }
         return root;
