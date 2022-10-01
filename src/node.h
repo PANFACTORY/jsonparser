@@ -16,6 +16,15 @@
 #include <iostream>
 
 namespace JsonParser {
+    enum class ValueType {
+        Default,
+        String,
+        Number,
+        BoolNull,
+        Object,
+        Array,
+    };
+
     /**
      * @brief   Node of AST
      *
@@ -28,108 +37,116 @@ public:
          *
          * @param[in]   std::string _key    JSON key this node contains
          */
-        Node(std::string _key) : children(0), children_array(0) {
+        Node(std::string _key) : object(0), array(0) {
             this->key = _key;
             this->value = "";
-            this->isvalueset = false;
-            this->ischildrenset = false;
-            this->isarrayset = false;
+            this->valuetype = ValueType::Default;
         }
-        Node(const Node& node) : children(0), children_array(0) {
+        Node(const Node& node) : object(0), array(0) {
             this->key = node.key;
             this->value = node.value;
-            this->isvalueset = node.isvalueset;
-            this->ischildrenset = node.ischildrenset;
-            this->isarrayset = node.isarrayset;
-            for (auto node_child : node.children) {
-                this->children.push_back(new Node(*node_child));
+            this->valuetype = node.valuetype;
+            for (auto child : node.object) {
+                this->object.push_back(new Node(*child));
             }
-            for (auto node_child : node.children_array) {
-                this->children_array.push_back(new Node(*node_child));
+            for (auto child : node.array) {
+                this->array.push_back(new Node(*child));
             }
         }
         ~Node() {
-            for (auto child : this->children) {
+            for (auto child : this->object) {
                 delete child;
             }
-            for (auto child : this->children_array) {
+            for (auto child : this->array) {
                 delete child;
             }
         }
         Node& operator=(const Node& node) {
-            for (auto child : this->children) {
+            for (auto child : this->object) {
                 delete child;
             }
-            for (auto child : this->children_array) {
+            for (auto child : this->array) {
                 delete child;
             }
             this->key = node.key;
             this->value = node.value;
-            this->isvalueset = node.isvalueset;
-            this->ischildrenset = node.ischildrenset;
-            this->isarrayset = node.isarrayset;
-            for (auto node_child : node.children) {
-                this->children.push_back(new Node(*node_child));
+            this->valuetype = node.valuetype;
+            for (auto child : node.object) {
+                this->object.push_back(new Node(*child));
             }
-            for (auto node_child : node.children_array) {
-                this->children_array.push_back(new Node(*node_child));
+            for (auto child : node.array) {
+                this->array.push_back(new Node(*child));
             }
             return *this;
         }
 
         /**
-         * @brief       Set value to this node
+         * @brief       Set value to this node as String
          *
          * @param[in]   std::string _value  JSON value this node contains
          */
-        void SetValue(std::string _value) {
+        void SetString(std::string _value) {
             this->value = _value;
-            if (this->isvalueset) {
-                throw std::runtime_error("At SetValue() in Node class: Value is set to node set value.");
+            if (this->valuetype != ValueType::Default) {
+                throw std::runtime_error("At SetString() in Node class: Some value is already set.");
             }
-            this->isvalueset = true;
-            if (this->ischildrenset) {
-                throw std::runtime_error("At SetValue() in Node class: Value is set to node set object.");
-            }
-            if (this->isarrayset) {
-                throw std::runtime_error("At SetValue() in Node class: Value is set to node set array.");
-            }
+            this->valuetype = ValueType::String;
         }
 
         /**
-         * @brief       Append a child node
+         * @brief       Set value to this node as Number
          *
-         * @param[in]   JsonParser::Node* _node Pointer indicating a child node appended in this node
+         * @param[in]   std::string _value  JSON value this node contains
          */
-        void AppendChild(Node* _node = nullptr) {
-            if (_node != nullptr) {
-                this->children.push_back(_node);
+        void SetNumber(std::string _value) {
+            this->value = _value;
+            if (this->valuetype != ValueType::Default) {
+                throw std::runtime_error("At SetNumber() in Node class: Some value is already set.");
             }
-            this->ischildrenset = true;
-            if (this->isvalueset) {
-                throw std::runtime_error("At AppendChild() in Node class: Object is set to node set value.");
+            this->valuetype = ValueType::Number;
+        }
+
+        /**
+         * @brief       Set value to this node as Boolean or Null
+         *
+         * @param[in]   std::string _value  JSON value this node contains
+         */
+        void SetBoolNull(std::string _value) {
+            this->value = _value;
+            if (this->valuetype != ValueType::Default) {
+                throw std::runtime_error("At SetBoolNull() in Node class: Some value is already set.");
             }
-            if (this->isarrayset) {
-                throw std::runtime_error("At AppendChild() in Node class: Object is set to node set array.");
+            this->valuetype = ValueType::BoolNull;
+        }
+
+        /**
+         * @brief       Append a child node as object
+         *
+         * @param[in]   JsonParser::Node* child Pointer indicating a child node appended as object in this node
+         */
+        void AppendObject(Node* child = nullptr) {
+            if (child != nullptr) {
+                this->object.push_back(child);
             }
+            if (this->valuetype != ValueType::Default && this->valuetype != ValueType::Object) {
+                throw std::runtime_error("At AppendObject() in Node class: Some value not Object is alreadey set.");
+            }
+            this->valuetype = ValueType::Object;
         }
 
         /**
          * @brief       Append a child node as array
          *
-         * @param[in]   JsonParser::Node* _node Pointer indicating a child node appended as array in this node
+         * @param[in]   JsonParser::Node* child Pointer indicating a child node appended as array in this node
          */
-        void AppendArray(Node* _node = nullptr) {
-            if (_node != nullptr) {
-                this->children_array.push_back(_node);
+        void AppendArray(Node* child = nullptr) {
+            if (child != nullptr) {
+                this->array.push_back(child);
             }
-            this->isarrayset = true;
-            if (this->isvalueset) {
-                throw std::runtime_error("At AppendArray() in Node class: Array is set to node set value.");
+            if (this->valuetype != ValueType::Default && this->valuetype != ValueType::Array) {
+                throw std::runtime_error("At AppendArray() in Node class: Some value not Array is alreadey set.");
             }
-            if (this->ischildrenset) {
-                throw std::runtime_error("At AppendArray() in Node class: Array is set to node set object.");
-            }
+            this->valuetype = ValueType::Array;
         }
 
         /**
@@ -139,7 +156,7 @@ public:
          * @return      Json::Parser Node*  Reference indicating a child node corresponding to the key
          */
         Node& operator[](std::string _key) {
-            for (auto child : this->children) {
+            for (auto child : this->object) {
                 if (child->key == _key) {
                     return *child;
                 }
@@ -154,8 +171,8 @@ public:
          * @return      JsonParser::Node&       Reference indicating a node corresponding to the index of array
          */
         Node& operator[](unsigned int _index) {
-            if (_index < this->children_array.size()) {
-                return *this->children_array[_index];
+            if (_index < this->array.size()) {
+                return *this->array[_index];
             }
             throw std::range_error("\"index\" is over length of Array.");
         }
@@ -166,7 +183,7 @@ public:
          * @return  std::string&    Reference indicating the value of node
          */
         std::string& Value() {
-            if (this-isvalueset) {
+            if (this->valuetype == ValueType::String || this->valuetype == ValueType::Number || this->valuetype == ValueType::BoolNull) {
                 return this->value;
             }
             throw std::runtime_error("Value doesn't exist.");
@@ -182,34 +199,42 @@ public:
             if (this->key != "") {
                 str += "\"" + this->key + "\":";
             }
-            if (this->isvalueset) {
+            switch (this->valuetype) {
+            case ValueType::String:
+                str += "\"" + this->value + "\"";
+                break;
+            case ValueType::Number:
+            case ValueType::BoolNull:
                 str += this->value;
-            } else if (this->ischildrenset) {
+                break;
+            case ValueType::Object:
                 str += "{";
-                if (this->children.size() > 0) {
-                    str += this->children[0]->Str();
+                if (this->object.size() > 0) {
+                    str += this->object[0]->Str();
                 }
-                for (int i = 1; i < this->children.size(); ++i) {
-                    str += "," + this->children[i]->Str();
+                for (int i = 1; i < this->object.size(); ++i) {
+                    str += "," + this->object[i]->Str();
                 }
                 str += "}";
-            } else if (this->isarrayset) {
+                break;
+            case ValueType::Array:
                 str += "[";
-                if (this->children_array.size() > 0) {
-                    str += this->children_array[0]->Str();
+                if (this->array.size() > 0) {
+                    str += this->array[0]->Str();
                 }
-                for (int i = 1; i < this->children_array.size(); ++i) {
-                    str += "," + this->children_array[i]->Str();
+                for (int i = 1; i < this->array.size(); ++i) {
+                    str += "," + this->array[i]->Str();
                 }
                 str += "]";
-            } else {
-                throw std::runtime_error("At operator<< of Node class: \"node\" is set neither value, object nor array.");
+                break;
+            default:
+                throw std::runtime_error("At Str() in Node class: This node has no content.");
             }
             return str;
         }
 private:
         std::string key, value;
-        bool isvalueset, ischildrenset, isarrayset;
-        std::vector<Node*> children, children_array;
+        ValueType valuetype;
+        std::vector<Node*> object, array;
     };
 }
