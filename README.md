@@ -1,17 +1,18 @@
 # JsonParser
 
-C++言語のためのJSONパーサーライブラリです。  
-std::istreamでJSONデータを受け取り、対応する抽象構文木を生成します。
+is a JSON parser library for C++.  
+Get json data as std::istream and return the corresponding AST.  
+This is a header only library.
 
 ## CI
 
-|状態|環境|
+|Status|Environment|
 |:--:|:--:|
 |[![CMake](https://github.com/PANFACTORY/jsonparser/actions/workflows/cmake.yml/badge.svg)](https://github.com/PANFACTORY/jsonparser/actions/workflows/cmake.yml)|ubuntu-latest(g++)|
 
-## 生成規則
+## Generative Grammar
 
-このライブラリではJSONフォーマットが以下の生成規則に従うものと想定します。
+This library interprets sentences defined as follows as JSON.  
 
 ```
 <Value> -> String | Number | Boolean | Null | <Object> | <Array>
@@ -19,9 +20,9 @@ std::istreamでJSONデータを受け取り、対応する抽象構文木を生�
 <Array> -> [ ] | [ <Value> {, <Value>} ]
 ```
 
-## サンプル
+## Example
 
-`main.cpp`を作成して以下のコードを入力します。
+Create `main.cpp` and type the following code.  
 
 ```
 #include <iostream>
@@ -40,33 +41,36 @@ int main() {
 }
 ```
 
-例えばWindowsでClangを用いる場合、以下のコマンドでビルド、実行します。  
-なお、`<Your Include Path>`は使用される環境に合わせて設定してください。
+Build and run with the following commands(, for example, use clang++).  
+Of course, set `<Your Include Path>` based on your environment.   
 
 ```
 clang++ -I <Your Include Path> ./main.cpp
 ./a.exe
 ```
 
-標準入力で以下を入力し、続けて⏎、Ctrl+z、⏎を入力します。
+Enter the following in the standard input.  
 
 ```
-{ "user_info": { "user_id": "A1234567", "user_name": "Yamada Taro" } }
+{ "user_info": { "user_id": "A1234567", "user_name": "Yamada Taro" } } ⏎ Ctrl+z ⏎
 ```
 
-すると、以下の結果が返されます。
+Then you can get the response as below.  
 
 ```
 {"user_info":{"user_id":"A1234567","user_name":"Yamada Taro"}}
 A1234567
 ```
 
-## ドキュメント
-- [ドキュメント](https://panfactory.github.io/jsonparser/)
+## Document
+- [Document](https://panfactory.github.io/jsonparser/)
 
-## 参考URL
-- [JSON形式](https://www.tohoho-web.com/ex/json.html)
+## Reference
+- [JSON format](https://www.tohoho-web.com/ex/json.html)
 
-## 依存
+## Dependency
 - Google Test
 - Doxygen
+
+## License
+- [MIT](https://github.com/PANFACTORY/jsonparser/blob/main/LICENSE)
