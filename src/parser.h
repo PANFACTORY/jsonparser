@@ -108,7 +108,7 @@ private:
                     if (chs[index_current + 1][0] != '"') {
                         throw std::runtime_error("At Object(): '\"' is expected, however other character is set.");
                     }
-                    child = new Node(chs[index_current + 1]);
+                    child = new Node(chs[index_current + 1].substr(1, chs[index_current + 1].size() - 2));
 
                     // Check exists ":" between "key" and Value.
                     if (index_current + 2 >= chs.size()) {
