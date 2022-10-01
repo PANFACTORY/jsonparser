@@ -59,7 +59,7 @@ clang++ -I <Your Include Path> ./main.cpp
 ```
 
 ## ドキュメント
-- [ドキュメント](https://panfactory.github.io/jsonparser/html)
+- [ドキュメント](https://panfactory.github.io/jsonparser/)
 
 ## 参考URL
 - [JSON形式](https://www.tohoho-web.com/ex/json.html)
