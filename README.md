@@ -3,6 +3,12 @@
 C++言語のためのJSONパーサーライブラリです。  
 std::istreamでJSONデータを受け取り、対応する抽象構文木を生成します。
 
+## CI
+
+|状態|環境|
+|:--:|:--:|
+|[![CMake](https://github.com/PANFACTORY/jsonparser/actions/workflows/cmake.yml/badge.svg)](https://github.com/PANFACTORY/jsonparser/actions/workflows/cmake.yml)|ubuntu-latest(g++)|
+
 ## 生成規則
 
 このライブラリではJSONフォーマットが以下の生成規則に従うものと想定します。
