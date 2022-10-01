@@ -180,7 +180,7 @@ public:
         std::string Str() {
             std::string str("");
             if (this->key != "") {
-                str += this->key + ":";
+                str += "\"" + this->key + "\":";
             }
             if (this->isvalueset) {
                 str += this->value;
