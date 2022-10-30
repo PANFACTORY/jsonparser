@@ -96,7 +96,7 @@ namespace JsonParser {
                 }
                 break;
             default:
-                chs.push_back(std::string(&ch));
+                chs.push_back(std::string(1, ch));
                 ch = ss.get();
                 break;
             }
