@@ -63,6 +63,12 @@ TEST(JsonParserTest, LexicalHappyTest10) {
     ASSERT_EQ(JsonParser::Lexer(ss).size(), 5);
 }
 
+TEST(JsonParserTest, LexicalHappyTest11) {
+    std::stringstream ss;
+    ss << R"({ "number": 1e4 })";
+    ASSERT_EQ(JsonParser::Lexer(ss).size(), 5);
+}
+
 // Unhappy path testing
 TEST(JsonParserTest, LexicalUnhappyTest1) {
     std::stringstream ss;
