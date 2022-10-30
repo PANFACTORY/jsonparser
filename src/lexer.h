@@ -72,7 +72,7 @@ namespace JsonParser {
                     ch = ss.get();
                 }
                 str = str.substr(0, str.find_last_not_of(" \f\t\v\r\n") + 1);
-                if (!std::regex_match(str, std::regex("-?(0|[1-9]\\d*)(\\.\\d+)?(e[-+](0|[1-9]\\d*)(\\.\\d+)?)?"))) {
+                if (!std::regex_match(str, std::regex("-?(0|[1-9]\\d*)(\\.\\d+)?(e[-+]?(0|[1-9]\\d*)(\\.\\d+)?)?"))) {
                     throw std::runtime_error("At LexicalAnalyzer(): \"str\" is not a number.");
                 }
                 chs.push_back(str);
