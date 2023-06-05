@@ -174,7 +174,8 @@ class Node {
                 return *child;
             }
         }
-        throw std::runtime_error("Object containing this key doesn't exist.");
+        throw std::runtime_error("Object containing the key \"" + _key +
+                                 "\" doesn't exist.");
     }
 
     /**
